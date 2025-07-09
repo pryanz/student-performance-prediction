@@ -3,7 +3,7 @@ Overview
 
 This project uses machine learning to predict student academic performance based on personal, social, and academic attributes. The dataset was taken from the UCI Machine Learning Repository and includes detailed student data from Portuguese secondary schools.
 
-# The goal was to:
+# Goal
 
 Predict final student performance (grades) as a multi-class classification task
 
@@ -75,7 +75,7 @@ One-hot encoding for categorical columns
 SMOTE (Synthetic Minority Oversampling Technique) on the training set for combacting low recall value for grade "4" due to fewer examples.
 
 
-Pipeline Setups:
+# Pipeline Setups
 
 before I was using sklearn.pipeline but we can't use smot inbetween steps and i was preprocessing in the pipeline so i switched to pipeline from imblearn.pipeline
 
@@ -117,14 +117,14 @@ goout, age, health
 Parental education levels
 
 
-Author
+# Author
 
 Priyansh Khare
 B.Tech Ece undergraduate at IIITDM Jabalpur
 GitHub : https://github.com/pryanz
 
 
-References
+# References
 UCI Machine Learning Repository
 
 Scikit-learn documentation
