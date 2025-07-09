@@ -102,7 +102,7 @@ Major boost after transforming target into categories or grades
 
 
 RF + G3 Category + SMOTE	0.81	
-Best performance — improved recall and balance
+Best performance, improved recall and balance
 
 
 # Key Features
