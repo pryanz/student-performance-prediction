@@ -1,8 +1,9 @@
 # Student Performance Prediction using ML (Logistic Regression, Random Forest, SMOTE)
 Overview
+
 This project uses machine learning to predict student academic performance based on personal, social, and academic attributes. The dataset was taken from the UCI Machine Learning Repository and includes detailed student data from Portuguese secondary schools.
 
-The goal was to:
+# The goal was to:
 
 Predict final student performance (grades) as a multi-class classification task
 
@@ -20,7 +21,7 @@ where
 3 -> 15 to 17
 4 -> 18 to 20
 
-Dataset
+# Dataset
 
 source : [UCI DATASET](https://archive.ics.uci.edu/ml/datasets/student+performance)
 
@@ -37,7 +38,7 @@ Support: school/family support, paid classes
 
 
 
-Problem Statement
+# Problem Statement
 
 Original target: G3 (final grade) → a numeric score from 0 to 20
 
@@ -57,7 +58,7 @@ This made it a multi-class classification problem with imbalanced target classes
 
 
 
-Models Used
+# Models Used
 
 Logistic Regression
 
@@ -83,7 +84,7 @@ the model results and accuracy improved drastically when i divided g3 into grade
 
 
 
-Results Summary
+# Results Summary
 
 Model	Accuracy
 
@@ -104,7 +105,7 @@ RF + G3 Category + SMOTE	0.81
 Best performance — improved recall and balance
 
 
-Key Features
+# Key Features
 Top features impacting student performance included:
 
 G1, G2 (past grades)
