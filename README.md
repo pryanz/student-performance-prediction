@@ -120,7 +120,7 @@ Parental education levels
 # Author
 
 Priyansh Khare
-B.Tech Ece undergraduate at IIITDM Jabalpur
+B.Tech Cse undergraduate at IIITDM Jabalpur
 GitHub : https://github.com/pryanz
 
 
