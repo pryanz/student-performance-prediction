@@ -1,134 +1,74 @@
-# Student Performance Prediction using ML (Logistic Regression, Random Forest, SMOTE)
-Overview
-
-This project uses machine learning to predict student academic performance based on personal, social, and academic attributes. The dataset was taken from the UCI Machine Learning Repository and includes detailed student data from Portuguese secondary schools.
-
-# Goal
-
-Predict final student performance (grades) as a multi-class classification task
-
-Compare results across Logistic Regression and Random Forest
-
-Handle class imbalance using SMOTE
-
-Improve model performance by grading final scores (G3) into 5 performance categories
-
-I separated the grades into categories of 0 (fail), 1 , 2 , 3 , 4.
-where 
-0 -> 0 to 9
-1 -> 10 to 11
-2 -> 12 to 14
-3 -> 15 to 17
-4 -> 18 to 20
-
-# Dataset
-
-source : [UCI DATASET](https://archive.ics.uci.edu/ml/datasets/student+performance)
-
-
-The dataset includes 33 features such as:
-
-Demographics: age, gender, parental education
-
-Study behavior: study time, failures, past grades (G1, G2)
-
-Social: going out, internet access, romantic relationship
-
-Support: school/family support, paid classes
-
-
-
-# Problem Statement
-
-Original target: G3 (final grade) → a numeric score from 0 to 20
-
-Transformed into 5 performance categories (G3_category):
-
-0: Very Poor
-
-1: Poor
-
-2: Average
-
-3: Good
-
-4: Excellent
-
-This made it a multi-class classification problem with imbalanced target classes.
-
-
-
-# Models Used
-
-Logistic Regression
-
-Random Forest Classifier
-
-I applied:
-
-Preprocessing using ColumnTransformer
-
-Feature scaling for numerical columns
-
-One-hot encoding for categorical columns
-
-SMOTE (Synthetic Minority Oversampling Technique) on the training set for combacting low recall value for grade "4" due to fewer examples.
-
-
-# Pipeline Setups
-
-before I was using sklearn.pipeline but we can't use smot inbetween steps and i was preprocessing in the pipeline so i switched to pipeline from imblearn.pipeline
-
-
-the model results and accuracy improved drastically when i divided g3 into grades or categories 
-
-
-
-# Results Summary
-
-Model	Accuracy
-
-Logistic Regression ->	0.30
-
-poor performance , maybe the data didnt had much linear relationship so i switched to randomforest
-
-
-Random Forest	-> 0.43	
-Better generalization but poor recall on minority classes
-
-
-RF + G3 Category Conversion	-> 0.78	
-Major boost after transforming target into categories or grades
-
-
-RF + G3 Category + SMOTE	0.81	
-Best performance, improved recall and balance
-
-
-# Key Features
-Top features impacting student performance included:
-
-G1, G2 (past grades)
-
-absences
-
-goout, age, health
-
-Parental education levels
-
-
-# Author
-
-Priyansh Khare
-B.Tech Cse undergraduate at IIITDM Jabalpur
-GitHub : https://github.com/pryanz
-
-
-# References
-UCI Machine Learning Repository
-
-Scikit-learn documentation
-
-Imbalanced-learn (SMOTE)
-
-Thank You !!
+# Student Performance Prediction
+
+## Overview
+This project leverages machine learning to predict student academic performance based on personal, social, and academic attributes. Using data from the UCI Machine Learning Repository (Portuguese secondary schools), the model forecasts final grades through multi-class classification.
+
+The project explores various algorithms and optimization techniques, culminating in a **Random Forest model with SMOTE** that achieves **81% accuracy**.
+
+## Problem Statement & Objective
+The original dataset predicts a numeric final grade ($G3$) ranging from 0 to 20. To create a more actionable classification tool, this project:
+1.  **Transformed targets:** Converted continuous scores into 5 distinct performance categories.
+2.  **Addressed imbalance:** Utilized Synthetic Minority Oversampling Technique (SMOTE) to handle underrepresented grade classes.
+3.  **Pipeline Optimization:** Solved pipeline compatibility issues by migrating from `sklearn.pipeline` to `imblearn.pipeline` to correctly integrate resampling steps.
+
+### Target Class Transformation
+The final grade ($G3$) was binned into the following categories:
+
+| Category | Label | Score Range | Performance |
+| :--- | :--- | :--- | :--- |
+| **0** | Very Poor | 0 - 9 | Fail |
+| **1** | Poor | 10 - 11 | Borderline |
+| **2** | Average | 12 - 14 | Satisfactory |
+| **3** | Good | 15 - 17 | Good |
+| **4** | Excellent | 18 - 20 | Distinction |
+
+## Dataset
+**Source:** UCI Machine Learning Repository
+The dataset contains 33 features covering:
+* **Demographics:** Age, gender, parental education levels.
+* **Study Behavior:** Weekly study time, past class failures, previous grades ($G1$, $G2$).
+* **Social Factors:** Frequency of going out, alcohol consumption, romantic relationships, internet access.
+* **Support Systems:** Family educational support, extra paid classes.
+
+## Methodology
+### 1. Preprocessing
+* **ColumnTransformer:** Applied specific transformations to different data types.
+* **Numerical Features:** Standardized using Feature Scaling.
+* **Categorical Features:** Transformed using One-Hot Encoding.
+
+### 2. Handling Imbalance
+The dataset suffered from a low recall value for the highest grade category ("4") due to fewer examples. **SMOTE** was applied strictly within the training folds to generate synthetic samples for minority classes without leaking information to the test set.
+
+*Technical Note:* Switched from `sklearn.pipeline` to `imblearn.pipeline` to enable resampling (SMOTE) as a step within the cross-validation workflow.
+
+### 3. Models Evaluated
+* **Logistic Regression:** Baseline linear model.
+* **Random Forest Classifier:** Ensemble method to capture non-linear relationships.
+
+## Results
+The performance improved significantly through iterative optimization:
+
+| Experiment Configuration | Accuracy | Observation |
+| :--- | :--- | :--- |
+| **Logistic Regression (Baseline)** | 30% | Poor performance due to non-linear data relationships. |
+| **Random Forest (Raw Targets)** | 43% | Better generalization but struggled with raw numeric targets. |
+| **Random Forest + Category Binning** | **78%** | Major improvement after converting regression to classification. |
+| **Random Forest + Binning + SMOTE** | **81%** | **Best Model.** Improved recall on minority classes (Grade 4). |
+
+## Key Features
+Feature importance analysis revealed the top factors influencing student performance:
+1.  **Past Grades (G1, G2):** The strongest predictors of final success.
+2.  **Absences:** High correlation with lower performance.
+3.  **Go Out:** Frequency of going out with friends.
+4.  **Parental Education:** Mother's and Father's education levels.
+5.  **Age & Health:** Demographic factors.
+
+## Tech Stack
+* **Language:** Python
+* **Libraries:** Scikit-learn, Pandas, NumPy, Imbalanced-learn (SMOTE)
+* **Tools:** Jupyter Notebook
+
+## Author
+**Priyansh Khare**
+B.Tech CSE Undergraduate, IIITDM Jabalpur
+[GitHub Profile](https://github.com/pryanz)
